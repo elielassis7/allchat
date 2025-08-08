@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+
+  --font-primary-font: "Josefin Sans";
+
+  --color-basecolor: #0a1a2f;
+  --color-basecolor-second: #11506E;
+  --color-basecolor-third: #162456;
+  --color-basecolor-fourth: #5fa1ff;
+
+
+  --animate-site: site 5s ease-in-out infinite;
+  @keyframes site {
+   0%, 100% {
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translateX(100px) translateY(70px) scale(0.95);
+    }
+  
+  }
+
+  --animate-zap: zap 5s ease-in-out infinite;
+ @keyframes zap {
+   0%, 100% {
+      transform: translateX(50px) translateY(50px) scale(0.95);
+    }
+    50% {
+      transform: translateX(0) scale(1);
+    }
+  
+  }
+
+    --animate-insta: insta 5s ease-in-out infinite;
+ @keyframes insta {
+   0%, 100% {
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translateX(110px) translateY(-30px) scale(0.95);
+    }
+  
+  }
+
+     --animate-face: face 5s ease-in-out infinite;
+ @keyframes face {
+   0%, 100% {
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translateX(-50px) scale(0.95);
+    }
+  
+  }
+
+       --animate-msg: msg 5s ease-in-out infinite;
+ @keyframes msg {
+   0%, 100% {
+      transform: translateX(0) scale(1);
+    }
+    50% {
+      transform: translateX(-50px) translateY(50px) scale(0.95);
+    }
+  
+  }
+
+  --animate-pulsar: pulse 5s ease-in-out infinite;
+   @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+}
+  
+  
+}
+
+@utility group-hover-blur {
+  div > div:not(:hover) {
+    filter: blur(10px);
+  }
+}
+
+.clip-path-integration {
+  clip-path: polygon(0 0, 80% 0%, 100% 20%, 100% 80%, 100% 99%, 20% 100%, 0% 80%, 0% 20%);
+}
