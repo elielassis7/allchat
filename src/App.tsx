@@ -1,13 +1,14 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+import { AuthProvider } from './context/AuthContext';
 import './global.css';
 import { AppRoutes } from './routes';
 import WhatsAppIcon from '/whatsapp-color.svg';
 
 export function App() {
   return (
-    <Router>
+    <Router basename='/allchat/'>
       <a
         type="button"
         href="https://wa.me/554432202120"
@@ -16,9 +17,11 @@ export function App() {
       >
         <img src={WhatsAppIcon} alt="" className="size-full" />
       </a>
-      <Header />
-      <AppRoutes />
-      <Footer />
+      <AuthProvider>
+        <Header />
+        <AppRoutes />
+        <Footer />
+      </AuthProvider>
     </Router>
   );
 }

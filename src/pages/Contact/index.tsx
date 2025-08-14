@@ -26,7 +26,8 @@ export function Contact() {
 
   return (
     <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <h1 className='text-3xl text-gray-900'>Em desenvolvimento</h1>
+      <div className="container mx-auto px-4 invisible">
         <h2 className="text-3xl font-bold text-center mb-12">Contact Us</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
