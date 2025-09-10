@@ -11,23 +11,23 @@ type Product = {
 const mockProducts: Product[] = [
   {
     id: 1,
-    name: "Notebook Pro X",
-    description: "Notebook de alta performance para profissionais exigentes.",
-    price: 7999.99,
+    name: "Chat bot nivel 1",
+    description: "Bot simples para atendimento básico.",
+    price: 299.99,
     imageUrl: "https://images.unsplash.com/photo-1471922694854-ff1b63b20054?q=80&w=872&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     id: 2,
-    name: "Mouse Gamer Ultra",
-    description: "Mouse com alta precisão e iluminação RGB.",
-    price: 299.9,
+    name: "Chat bot nivel 2",
+    description: "Bot com integração a sistemas externos.",
+    price: 599.9,
     imageUrl: "https://images.unsplash.com/photo-1471922694854-ff1b63b20054?q=80&w=872&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 3,
-    name: "Monitor 4K Vision",
-    description: "Monitor 4K com cores vibrantes e alta taxa de atualização.",
-    price: 2499,
+    name: "Disparo de mensagens em massa",
+    description: "Envio de campanhas para listas segmentadas.",
+    price: 899.9,
     imageUrl: "https://images.unsplash.com/photo-1471922694854-ff1b63b20054?q=80&w=872&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
