@@ -11,7 +11,7 @@ function StatCard({ title, value }: { title: string; value: string | number }) {
   );
 }
 
-export default function Dashboard() {
+export function Dashboard() {
   const [stats, setStats] = useState<Stats>({ users: 0, posts: 0, visits: 0, conversions: 0 });
 
   useEffect(() => {

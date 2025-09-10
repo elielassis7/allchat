@@ -1,11 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Mail, Phone } from "lucide-react";
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email'),
-  message: z.string().min(10, 'Message must be at least 10 characters')
+  name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
+  email: z.string().email('Por favor, insira um e-mail válido'),
+  phone: z
+    .string()
+    .transform((val) => val.replace(/\D/g, ''))
+    .refine((val) => val.length === 11, {
+      message: 'Por favor, insira um telefone válido'
+    }),
+  message: z.string().min(10, 'A mensagem deve ter pelo menos 10 caracteres')
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -19,69 +27,110 @@ export function Contact() {
     resolver: zodResolver(contactSchema)
   });
 
+  const [phoneValue, setPhoneValue] = useState("");
+
+  function formatPhone(value: string) {
+    // Remove tudo que não for número
+    value = value.replace(/\D/g, "");
+    // Aplica a máscara (00) 9 8765-4321
+    value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+    value = value.replace(/(\d{1}) (\d{4})(\d)/, "$1 $2-$3");
+    value = value.replace(/(\d{4})-(\d{5})/, "$1-$2");
+    value = value.replace(/(-\d{4})\d+?$/, "$1");
+    return value;
+  }
+
   const onSubmit = (data: ContactFormData) => {
     console.log(data);
     // Handle form submission
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <h1 className='text-3xl text-gray-900'>Em desenvolvimento</h1>
-      <div className="container mx-auto px-4 invisible">
-        <h2 className="text-3xl font-bold text-center mb-12">Contact Us</h2>
+    <section className="py-20 bg-linear-to-r/oklab from-basecolor to-basecolor-second">
+
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-12 font-primary-font text-white">Fale conosco</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-xl font-semibold mb-4">Get in touch</h3>
-            <p className="text-gray-600 mb-6">
-              Have questions about our products or services? Fill out the form and we'll get back to you as soon as possible.
+            <h3 className="text-xl font-semibold mb-4 font-primary-font text-indigo-50">Entre em contato</h3>
+            <p className="text-gray-300 mb-6 font-secondary-font">
+              Tem dúvidas sobre nossos produtos ou serviços? Preencha o formulário e entraremos em contato o mais breve possível.
             </p>
             <div className="space-y-4">
               <div className="flex items-start">
-                <div className="text-blue-600 mr-4 mt-1">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
+                <div className="text-indigo-500 mr-4 mt-1">
+                  <Mail size={24} />
                 </div>
                 <div>
-                  <p className="font-medium">Email</p>
-                  <p className="text-gray-600">contact@allchatbusiness.com.br</p>
+                  <p className="font-medium text-indigo-500">Email</p>
+                  <p className="text-indigo-200">contact@allchatbusiness.com.br</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="text-indigo-500 mr-4 mt-1">
+                  <Phone size={24} />
+                </div>
+                <div>
+                  <p className="font-medium text-indigo-500">Telefone</p>
+                  <p className="text-indigo-200">(44) 3220-2120</p>
                 </div>
               </div>
             </div>
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-sm">
+
+
+
+          <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 md:mx-24 lg:mx-0 rounded-lg shadow-sm font-secondary-font">
             <div className="mb-4">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Name
+              <label htmlFor="name" className="block text-sm font-medium text-indigo-700 mb-1">
+                Nome
               </label>
               <input
                 id="name"
                 type="text"
-                className={`w-full px-3 py-2 border rounded-md ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full px-3 py-2 border rounded-md ${errors.name ? 'border-red-500' : 'border-gray-700'}`}
                 {...register('name')}
               />
               {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
+              <label htmlFor="email" className="block text-sm font-medium text-indigo-700 mb-1">
+                E-mail
               </label>
               <input
                 id="email"
                 type="email"
-                className={`w-full px-3 py-2 border rounded-md ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full px-3 py-2 border rounded-md ${errors.email ? 'border-red-500' : 'border-gray-700'}`}
                 {...register('email')}
               />
               {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
             </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-sm font-medium text-indigo-700 mb-1">
+                Telefone
+              </label>
+              <input
+                id="phone"
+                type="tel"
+                className={`w-full px-3 py-2 border rounded-md ${errors.phone ? 'border-red-500' : 'border-gray-700'}`}
+                {...register('phone')}
+                value={phoneValue}
+                onChange={e => {
+                  const formatted = formatPhone(e.target.value);
+                  setPhoneValue(formatted);
+                }}
+                maxLength={16}
+              />
+              {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
+            </div>
             <div className="mb-6">
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                Message
+              <label htmlFor="message" className="block text-sm font-medium text-indigo-700 mb-1">
+                Menssagem
               </label>
               <textarea
                 id="message"
                 rows={4}
-                className={`w-full px-3 py-2 border rounded-md ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full px-3 py-2 border rounded-md ${errors.message ? 'border-red-500' : 'border-gray-700'}`}
                 {...register('message')}
               ></textarea>
               {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
@@ -90,9 +139,11 @@ export function Contact() {
               type="submit"
               className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors"
             >
-              Send Message
+              Enviar Menssagem
             </button>
           </form>
+
+
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../lib/axios";
 import type { SiteSettings } from "../../types";
 
-export default function Settings() {
+export function Settings() {
   const [form, setForm] = useState<SiteSettings>({
     siteName: "Meu Site",
     tagline: "Mais um site incrível",

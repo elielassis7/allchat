@@ -23,16 +23,16 @@ export function Features() {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-0% from-basecolor to-60% to-basecolor-fourth font-primary-font">
+    <section className="py-16 bg-gradient-to-b from-0% from-basecolor to-60% to-basecolor-fourth">
       <div className="container mx-auto px-4">
-        <h2 className="text-[40px] text-blue-100 font-bold text-center mb-6">Por que utilizar a Allchat é fundamental?</h2>
-        <p className="text-3xl text-blue-300 font-medium text-center mb-12">Aumente a Produtividade</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 hover:*:opacity-40">
+        <h2 className="text-2xl md:text-[40px] xl:text-6xl text-blue-100 font-bold font-primary-font text-center mb-6">Por que utilizar a Allchat é fundamental?</h2>
+        <p className="text-lg md:text-3xl xl:text-5xl text-blue-300 font-medium font-secondary-font text-center mb-12">Aumente a Produtividade</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:hover:*:opacity-40">
           {features.map((feature, index) => (
-            <div key={index} className="bg-gradient-to-b from-basecolor-third to-basecolor p-6 rounded-lg shadow-md transition hover:opacity-100! hover:-translate-y-4 hover:scale-110 duration-500 ease-in-out group hover:from-white! hover:to-blue-100!  hover:shadow-md">
-              <h2 className="text-6xl text-blue-100 mb-4 font-bold group-hover:text-basecolor-third">{feature.icon}</h2>
-              <h3 className="text-xl text-blue-100 font-bold mb-2 group-hover:text-basecolor-third">{feature.title}</h3>
-              <p className="text-gray-200 group-hover:text-gray-700">{feature.description}</p>
+            <div key={index} className="bg-gradient-to-b from-basecolor-third to-basecolor p-6 rounded-lg shadow-md transition md:hover:opacity-100! md:hover:-translate-y-4 md:hover:scale-110 duration-500 ease-in-out md:group md:hover:from-white! md:hover:to-blue-100!  md:hover:shadow-md">
+              <h2 className="text-4xl md:text-6xl text-blue-100 mb-4 font-bold md:group-hover:text-basecolor-third font-tertiary-font">{feature.icon}</h2>
+              <h3 className="text-xl lg:text-2xl xl:text-3xl text-blue-100 font-bold mb-2 md:group-hover:text-basecolor-third font-primary-font">{feature.title}</h3>
+              <p className="text-gray-200 md:group-hover:text-gray-700 font-secondary-font">{feature.description}</p>
             </div>
           ))}
         </div>

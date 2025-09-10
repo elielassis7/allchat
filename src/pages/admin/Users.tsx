@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../lib/axios";
 import type { UserRecord } from "../../types";
 
-export default function Users() {
+export function Users() {
   const [users, setUsers] = useState<UserRecord[]>([]);
 
   useEffect(() => {

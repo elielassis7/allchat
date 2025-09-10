@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../lib/axios";
 import type { ContentItem } from "../../types";
 
-export default function Content() {
+export function Content() {
   const [items, setItems] = useState<ContentItem[]>([]);
   const [title, setTitle] = useState("");
 

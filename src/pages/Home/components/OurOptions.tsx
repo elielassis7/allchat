@@ -36,14 +36,14 @@ export function OurOptions() {
 
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-5 gap-4 px-4 py-5 h-[550px]">
-      {/* Botões - Stack vertical no mobile */}
-      <div className="flex flex-col col-span-1 gap-4">
+    <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 md:grid-rows-5 gap-4 px-4 py-5 mb-4 h-[650px] md:h-[550px] 2xl:min-h-[50vh]">
+
+      <div className="md:flex md:flex-col xl:items-end col-span-1 grid grid-cols-2 gap-2 md:gap-4">
         {options.map((item) => (
           <motion.div
             key={item.key}
-            className={`flex items-center gap-2 px-4 py-6 rounded-xl cursor-pointer 
-              transition-colors shadow-sm md:h-[100px] mt-4
+            className={`flex items-center col-span-1 gap-2 p-2 lg:px-4 lg:py-6 md:p-3 lg:p-6 md:min-h-14 lg:min-h-16 rounded-xl cursor-pointer 
+              transition-colors shadow-sm md:h-[100px] mt-0.5 md:mt-4 xl:min-w-[21rem] 2xl:min-w-[24rem]
               ${selected === item.key
                 ? "bg-gradient-to-r from-indigo-500 to-emerald-500 text-white shadow-lg"
                 : "bg-gray-100 text-gray-800 hover:bg-emerald-100 hover:text-indigo-800"
@@ -52,8 +52,8 @@ export function OurOptions() {
             whileTap={{ scale: 0.97 }}
             onClick={() => setSelected(item.key)}
           >
-            <span className="text-2xl">{item.icon}</span>
-            <span className="text-sm md:text-base font-semibold">{item.label}</span>
+            <span className="text-lg lg:text-2xl 2xl:text-2xl">{item.icon}</span>
+            <span className="text-xs lg:text-base xl:text-xl 2xl:text-2xl font-primary-font font-semibold">{item.label}</span>
           </motion.div>
         ))}
       </div>
@@ -65,28 +65,28 @@ export function OurOptions() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="col-span-1 md:col-span-3 grid grid-cols-3 row-span-5 bg-neutral-900 
-          text-gray-100 rounded-xl p-6 shadow-md"
+          text-gray-100 rounded-xl p-2 md:p-6 shadow-md overflow-hidden"
       >
-        <div className="col-span-2 row-span-5">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-3xl text-emerald-500">
+        <div className="col-span-3 md:col-span-2 row-span-5">
+          <div className="flex items-center gap-2 lg:gap-3 xl:gap-5 mb-4">
+            <span className="text-xl lg:text-3xl xl:text-5xl text-emerald-500">
               {options.find(o => o.key === selected)?.icon}
             </span>
-            <h3 className="text-xl md:text-3xl font-bold">
+            <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-5xl font-primary-font font-bold">
               {options.find(o => o.key === selected)?.label}
             </h3>
           </div>
-          <p className="text-base md:text-lg leading-relaxed tracking-wide pb-5">
+          <p className="text-base md:text-lg xl:text-2xl font-secondary-font leading-relaxed tracking-wide pb-5">
             {contents[selected]}
           </p>
           <ButtonAction />
         </div>
 
-        <div className="col-span-1 row-span-5">
+        <div className="hidden md:flex md:col-span-1 row-span-5">
           <img
             src={options.find(o => o.key === selected)?.image}
             alt="Imagem"
-            className="h-[450px] object-cover"
+            className="min-h-[450px] object-cover"
           />
         </div>
 
