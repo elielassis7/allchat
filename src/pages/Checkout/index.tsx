@@ -4,57 +4,33 @@ import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import * as z from "zod";
 
-interface CheckoutSchema {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  cep: string;
-  street: string;
-  number: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-  country: string;
-  personType: "pf" | "pj";
-  document: string;
-  paymentMethod: "boleto" | "card";
-}
 
-const checkoutSchema = z.object({
-  firstName: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
-  lastName: z.string().min(2, "O sobrenome deve ter pelo menos 2 caracteres"),
-  email: z.string().email("Por favor, insira um e-mail válido"),
-  phone: z
-    .string()
-    .transform((val) => val.replace(/\D/g, ""))
-    .refine((v) => v.length >= 10 && v.length <= 11, {
-      message: "Por favor, insira um telefone válido (10-11 dígitos)",
-    }),
-  cep: z
-    .string()
-    .transform((v) => v.replace(/\D/g, ""))
-    .refine((v) => v.length === 8, { message: "CEP inválido" }),
-  street: z.string().min(1, "Rua obrigatória"),
-  number: z.string().min(1, "Número é obrigatório"),
-  neighborhood: z.string().min(1, "Bairro obrigatório"),
-  city: z.string().min(1, "Cidade obrigatória"),
-  state: z.string().min(1, "Estado obrigatório"),
-  country: z.string().min(1, "País obrigatório"),
-  personType: z.enum(["pf", "pj"]),
-  document: z
-    .string()
-    .transform((val) => val.replace(/\D/g, ""))
-    .refine(
-      (v, ctx) => {
-        const pt = ctx?.parent as CheckoutSchema;
-        if (pt.personType === "pf") return v.length === 11;
-        return v.length === 14;
-      },
-      { message: "Documento inválido (CPF 11 / CNPJ 14 dígitos)" }
-    ),
-  paymentMethod: z.enum(["boleto", "card"]),
-});
+const checkoutSchema = z
+  .object({
+    firstName: z.string().min(2, "O nome deve ter pelo menos 2 caracteres"),
+    lastName: z.string().min(2, "O sobrenome deve ter pelo menos 2 caracteres"),
+    email: z.string().email("Por favor, insira um e-mail válido"),
+    phone: z
+      .string()
+      .transform((val) => val.replace(/\D/g, "")),
+    cep: z
+      .string()
+      .transform((v) => v.replace(/\D/g, ""))
+      .refine((v) => v.length === 8, { message: "CEP inválido" }),
+    street: z.string().min(1, "Rua obrigatória"),
+    number: z.string().min(1, "Número é obrigatório"),
+    neighborhood: z.string().min(1, "Bairro obrigatório"),
+    city: z.string().min(1, "Cidade obrigatória"),
+    state: z.string().min(1, "Estado obrigatório"),
+    country: z.string().min(1, "País obrigatório"),
+    personType: z.enum(["pf", "pj"]),
+    document: z.string().transform((val) => val.replace(/\D/g, "")),
+    paymentMethod: z.enum(["boleto", "card"]),
+  })
+  .refine((data) => {
+    if (data.personType === "pf") return data.document.length === 11;
+    return data.document.length === 14;
+  }, { path: ["document"], message: "Documento inválido (CPF 11 / CNPJ 14 dígitos)" });
 
 type CheckoutForm = z.infer<typeof checkoutSchema>;
 
@@ -260,8 +236,8 @@ export function Checkout({ product }: { product?: Product }) {
             <div>
               <label className="block text-sm font-medium">{watchPersonType === "pf" ? "CPF" : "CNPJ"}</label>
               <input {...register("document")} className="w-full mt-1 px-3 py-2 border rounded-xl" />
-              {errors.document?.message && (
-                <p className="text-sm text-red-600">{errors.document.message}</p>
+              {errors.document && (
+                <p className="text-sm text-red-600">{errors.document?.message}</p>
               )}
             </div>
           </div>

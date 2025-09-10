@@ -1,9 +1,9 @@
-import { API } from '../lib/axios';
+import { api } from '../lib/axios';
 
 const username = ''
 const password = ''
 
-const res = await fetch(`${API}/login`, {
+const res = await fetch(`${api}/login`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
